@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Quiz</title>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .container {
+            text-align: center;
+            width: 80%;
+        }
+        .neon-box {
+            border: 2px solid #00f;
+            padding: 15px;
+            margin: 15px;
+            width: 90%;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            position: relative;
+            display: inline-block;
+            color: white;
+            text-shadow: 0 0 5px #00f, 0 0 10px #00f;
+            box-shadow: 0 0 10px #00f, 0 0 20px #00f;
+            border-radius: 10px;
+            background: rgba(0, 0, 139, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.5s;
+        }
+        .neon-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #00f, 0 0 30px #00f;
+        }
+        .arrow-box {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin: auto;
+        }
+        .neon-button {
+            cursor: pointer;
+        }
+        .pending {
+            background-color: orange !important;
+            box-shadow: 0 0 15px orange, 0 0 30px orange !important;
+        }
+        .correct {
+            background-color: green !important;
+            box-shadow: 0 0 15px green, 0 0 30px green !important;
+        }
+        .incorrect {
+            background-color: red !important;
+            box-shadow: 0 0 15px red, 0 0 30px red !important;
+        }
+        .next-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            background-color: #00f;
+            color: white;
+            text-shadow: 0 0 5px #00f, 0 0 10px #00f;
+            box-shadow: 0 0 10px #00f, 0 0 20px #00f;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .next-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px #00f, 0 0 30px #00f;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const correctAnswer = "A"; // Đáp án đúng
+            const buttons = document.querySelectorAll(".neon-button");
+            const correctSound = new Audio('correct_answer.mp3');
+            const incorrectSound = new Audio('wrong_answer.mp3');
+            const bgMusic = new Audio('Đừng Làm Trái Tim Anh Đau - Sơn Tùng MTP.mp3');
+            bgMusic.loop = true;
+            bgMusic.play();
+
+            buttons.forEach(button => {
+                button.addEventListener("click", function () {
+                    buttons.forEach(btn => btn.classList.remove("pending", "correct", "incorrect"));
+                    this.classList.add("pending");
+                    let selectedAnswer = this.innerText.charAt(0);
+                    setTimeout(() => {
+                        this.classList.remove("pending");
+                        if (selectedAnswer === correctAnswer) {
+                            this.classList.add("correct");
+                            correctSound.play();
+                        } else {
+                            this.classList.add("incorrect");
+                            incorrectSound.play();
+                        }
+                    }, 3000);
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="neon-box" style="width: 100%;">Câu hỏi sẽ hiển thị ở đây</div>
+        <div class="arrow-box">
+            <div class="neon-box neon-button">A. Đáp án 1</div>
+            <div class="neon-box neon-button">B. Đáp án 2</div>
+        </div>
+        <div class="arrow-box">
+            <div class="neon-box neon-button">C. Đáp án 3</div>
+            <div class="neon-box neon-button">D. Đáp án 4</div>
+        </div>
+        <button class="next-button" onclick="window.location.href='next-question.html'">Câu hỏi tiếp theo</button>
+    </div>
+</body>
+</html>
