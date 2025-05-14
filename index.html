@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.css">
+    <title>Mini game - Nhóm 4</title>                      
+</head>
+<style>
+    body {
+    background-color: #ffebf0;
+    color: #ff69b4;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    text-align: center;
+    overflow: hidden;
+}
+
+.button {
+    padding: 20px 40px;
+    font-size: 24px;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    background-color: #ff69b4;
+    color: white;
+    text-shadow: 0 0 5px #ff1493, 0 0 10px #ff1493;
+    box-shadow: 0 0 10px #ff69b4, 0 0 20px #ff1493;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 20px;
+}
+.button:hover {
+    box-shadow: 0 0 15px #ff1493, 0 0 30px #ff1493;
+}
+.text {
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #ff1493;
+    text-shadow: 0 0 5px #ff69b4, 0 0 10px #ff1493;
+}
+
+.slogan {
+    font-size: 40px;
+    font-weight: bold;
+    color: #ff1493;
+    margin-bottom: 15px;
+    text-shadow: 0 0 5px #ff69b4;
+}
+.icon {
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+
+.music-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #ff69b4;
+    text-shadow: 0 0 5px #ff1493, 0 0 10px #ff1493;
+}
+</style>
+<body>
+    
+    <audio id="background-music" autoplay loop>
+        <source src="/Q&A/source/audio/background_music.mp3" type="audio/mp3">
+    </audio>
+    <button class="music-toggle" onclick="toggleMusic()">🎵</button>
+    <div class="text">Câu hỏi trắc nghiệm </div>
+    <button class="button" onclick="window.location.href='question_1.html'">Bắt đầu 💖</button>
+
+    <script src="home.js">
+        let audio = document.getElementById("background-music");
+        let isPlaying = false;
+        audio.volume = 0.6;
+        
+        function toggleMusic() {
+            if (isPlaying) {
+                audio.pause();
+            } else {
+                audio.play().catch(error => console.log("Autoplay blocked: ", error));
+            }
+            isPlaying = !isPlaying;
+        }
+
+    </script>
+</body>
+</html>

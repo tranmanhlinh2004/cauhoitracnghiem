@@ -3,10 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/Q&A/public/css/question.css">
+    <link rel="stylesheet" href="question.css">
     <title>Câu 2</title>
     <script src=""></script>
 </head>
+<style>
+    body {
+    background: url('/Q&A/source/image/pink.png');
+    background-size: cover;
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    overflow: hidden;
+}
+.container {
+    text-align: center;
+    width: 80%;
+}
+.question-box {
+    border: 2.5px solid rgb(255, 255, 255);
+    padding: 15px;
+    margin: 15px;
+    width: 90%;
+    text-align: center;
+    font-size: 42px;
+    font-weight: bold;
+    position: relative;
+    display: inline-block;
+    color: white;
+    text-shadow: 0 0 8px rgb(15, 15, 15), 0 0 10px rgb(255, 255, 255);
+    box-shadow: 0 0 10px rgb(255, 255, 255), 0 0 20px rgb(255, 255, 255);
+    border-radius: 10px;   
+}
+
+.answer-box {
+    border: 2px solid rgb(255, 255, 255);
+    padding: 15px;
+    margin: 15px;
+    width: 80%;
+    text-align: center;
+    font-size: 42px;
+    font-weight: bold;
+    position: relative;
+    display: inline-block;
+    color: white;
+    text-shadow: 0 0 8px rgb(15, 15, 15), 0 0 10px rgb(255, 255, 255);
+    box-shadow: 0 0 10px rgb(255, 255, 255), 0 0 20px rgb(255, 255, 255);
+    border-radius: 10px;
+    
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.5s;
+}
+
+.answer-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgb(255, 255, 255), 0 0 30px rgb(255, 255, 255);
+}
+.arrow-box {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: auto;
+}
+.answer-button {
+    cursor: pointer;
+}
+.pending {
+    background-color: orange !important;
+    box-shadow: 0 0 15px orange, 0 0 30px orange !important;
+}
+.correct {
+    background-color: green !important;
+    box-shadow: 0 0 15px green, 0 0 30px green !important;
+}
+.incorrect {
+    background-color: red !important;
+    box-shadow: 0 0 15px red, 0 0 30px red !important;
+}
+.next-button {
+    margin-top: 90px;
+    padding: 10px 20px;
+    font-size: 38px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: rgba(42, 42, 42, 0.06);
+    color: rgb(255, 255, 255);
+    text-shadow: 0 0 5px rgb(0, 0, 0), 0 0 10px rgb(255, 255, 255);
+    box-shadow: 0 0 10px rgb(255, 255, 255), 0 0 20px rgb(255, 255, 255);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.next-button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 15px rgb(255, 255, 255), 0 0 30px rgb(255, 255, 255);
+}
+</style>
 <body>
     <div class="container">
         <div class="question-box">Loại hình cơ cấu xã hội nào đóng vai trò quan trọng hàng đầu và chi phối các loại hình cơ cấu xã hội khác?</div>
@@ -20,6 +115,31 @@
         </div>
         <button class="next-button" onclick="window.location.href='question_3.html'">Câu hỏi tiếp theo</button>
     </div>
-    <script src="/Q&A/public/js/question_2.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const correctAnswer = "D"; // Đáp án đúng
+    const buttons = document.querySelectorAll(".answer-button");
+    const correctSound = new Audio('correct_answer.mp3');
+    const incorrectSound = new Audio('wrong_answer.mp3');
+    
+    buttons.forEach(button => {
+        button.addEventListener("click", function () {
+            buttons.forEach(btn => btn.classList.remove("pending", "correct", "incorrect"));
+            this.classList.add("pending");
+            let selectedAnswer = this.innerText.charAt(0);
+            setTimeout(() => {
+                this.classList.remove("pending");
+                if (selectedAnswer === correctAnswer) {
+                    this.classList.add("correct");
+                    correctSound.play();
+                } else {
+                    this.classList.add("incorrect");
+                    incorrectSound.play();
+                }
+            }, 3000);
+        });
+    });
+});
+    </script>
 </body>
 </html>
